@@ -244,6 +244,7 @@ struct ArtifactsView: View {
             if Task.isCancelled {
                 return
             }
+            await Task.detached { config.prepareModel() }.value
             await searchIndex.index(
                 artifacts: store.artifacts,
                 model: config.modelID,
